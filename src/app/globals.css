@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-primary text-text-primary;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -106,11 +102,6 @@
 }
 
 @layer utilities {
-  /* Text utilities */
-  .text-balance {
-    text-wrap: balance;
-  }
-
   /* Animation utilities */
   .animate-delay-100 {
     animation-delay: 100ms;
