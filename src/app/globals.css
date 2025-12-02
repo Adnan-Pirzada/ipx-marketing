@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-primary text-text-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary/50 rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-secondary/30 text-white;
+  }
+}
+
+@layer components {
+  /* Glass effect */
+  .glass {
+    @apply bg-elevated/70 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-strong {
+    @apply bg-elevated/90 backdrop-blur-[40px] border border-white/15;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-white to-text-secondary bg-clip-text text-transparent;
+  }
+
+  .gradient-glow {
+    @apply bg-gradient-to-r from-secondary to-blue-500 bg-clip-text text-transparent;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-secondary to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-secondary/50 hover:shadow-xl hover:shadow-secondary/70 transition-all duration-300 hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-elevated border border-secondary/30 text-secondary font-semibold rounded-lg hover:bg-secondary/10 hover:border-secondary transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 text-text-secondary font-medium hover:text-secondary hover:bg-secondary/10 rounded-lg transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card {
+    @apply p-6 rounded-xl bg-elevated/70 backdrop-blur-xl border border-white/10 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/20;
+  }
+
+  .card-feature {
+    @apply p-8 rounded-2xl bg-gradient-to-br from-elevated to-surface border border-secondary/20 shadow-xl shadow-secondary/10 hover:shadow-2xl hover:shadow-secondary/30 transition-all duration-500;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 bg-surface border border-white/10 rounded-lg text-text-primary placeholder-text-tertiary focus:border-secondary focus:ring-2 focus:ring-secondary/50 transition-all duration-300 outline-none;
+  }
+
+  /* Section container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24;
+  }
+
+  /* Hover effects */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-glow-md;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl;
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation utilities */
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Perspective for 3D transforms */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Gradient borders */
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #00C2FF, #0099CC);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 194, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 194, 255, 0.6);
+  }
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-elevated rounded-lg;
+}
+
+/* Focus visible for accessibility */
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-secondary ring-offset-2 ring-offset-primary;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
