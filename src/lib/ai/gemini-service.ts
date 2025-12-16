@@ -1,11 +1,5 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'
 
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error('GEMINI_API_KEY is not defined in environment variables')
-}
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
-
 export const aiConfig = {
   model: process.env.GEMINI_MODEL || 'gemini-1.5-pro',
   generationConfig: {
@@ -26,9 +20,25 @@ export const aiConfig = {
   ],
 }
 
-export const model = genAI.getGenerativeModel({
-  model: aiConfig.model,
-  ...aiConfig,
-})
+let genAI: GoogleGenerativeAI | null = null
 
-export default genAI
+function getGenAI() {
+  if (!genAI) {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY is not defined in environment variables')
+    }
+    genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+  }
+  return genAI
+}
+
+export function getModel() {
+  const client = getGenAI()
+  return client.getGenerativeModel({
+    model: aiConfig.model,
+    generationConfig: aiConfig.generationConfig,
+    safetySettings: aiConfig.safetySettings,
+  })
+}
+
+export default getGenAI

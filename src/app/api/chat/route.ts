@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { model } from '@/lib/ai/gemini-service'
+import { getModel } from '@/lib/ai/gemini-service'
 import { SYSTEM_PROMPTS } from '@/lib/ai/prompts'
 
 export async function POST(request: NextRequest) {
@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build conversation context
+    const model = getModel()
     const chat = model.startChat({
       history: [
         {
